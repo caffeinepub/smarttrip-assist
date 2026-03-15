@@ -8,6 +8,7 @@ import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Packages from "./components/Packages";
 import Services from "./components/Services";
+import WhyChoose from "./components/WhyChoose";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
+          <WhyChoose />
           <About />
           <Services />
           <Destinations />
