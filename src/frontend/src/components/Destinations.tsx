@@ -8,7 +8,7 @@ type Destination = {
   id: number;
   name: string;
   country: string;
-  region: "europe" | "middleeast" | "asia";
+  region: "europe" | "middleeast" | "asia" | "africa";
   image: string;
   description: string;
   parent?: string;
@@ -78,6 +78,15 @@ const destinations: Destination[] = [
     image: "/assets/generated/ireland.dim_800x500.jpg",
     description:
       "The Emerald Isle enchants with the dramatic Cliffs of Moher, cozy village pubs, and a warmth of culture and hospitality unmatched anywhere in the world.",
+  },
+  {
+    id: 28,
+    name: "Albania",
+    country: "Albania, Europe",
+    region: "europe",
+    image: "/assets/generated/albania.dim_800x600.jpg",
+    description:
+      "Europe's hidden gem — Albania's stunning Riviera coastline boasts crystal-clear turquoise waters, dramatic cliffs, and charming fishing villages. Explore ancient ruins, Ottoman bazaars, and warm Mediterranean hospitality at unbeatable value.",
   },
   // Middle East
   {
@@ -274,9 +283,49 @@ const destinations: Destination[] = [
       "Yala National Park is home to one of the world's densest leopard populations. Giant elephants, vibrant peacocks, and rare birds make Sri Lanka a must-visit safari destination.",
     parent: "Sri Lanka",
   },
+  {
+    id: 29,
+    name: "Kazakhstan",
+    country: "Kazakhstan, Central Asia",
+    region: "asia",
+    image: "/assets/generated/kazakhstan.dim_800x600.jpg",
+    description:
+      "A land of vast contrasts — the dramatic Charyn Canyon, endless golden steppes, and the modern skyline of Almaty make Kazakhstan one of Central Asia's most surprising destinations. Experience nomadic culture and untamed natural beauty.",
+    parent: "Central Asia",
+  },
+  {
+    id: 30,
+    name: "Uzbekistan",
+    country: "Uzbekistan, Central Asia",
+    region: "asia",
+    image: "/assets/generated/uzbekistan.dim_800x600.jpg",
+    description:
+      "The heart of the ancient Silk Road — Samarkand's Registan Square, Bukhara's medieval old city, and Khiva's walled inner city are UNESCO World Heritage masterpieces that transport you back through centuries of history.",
+    parent: "Central Asia",
+  },
+  {
+    id: 31,
+    name: "Turkmenistan",
+    country: "Turkmenistan, Central Asia",
+    region: "asia",
+    image: "/assets/generated/turkmenistan.dim_800x600.jpg",
+    description:
+      "Home to the famous Darvaza Gas Crater — the 'Door to Hell' — burning continuously for decades in the Karakum Desert. Turkmenistan offers one of the world's most extraordinary and otherworldly travel experiences.",
+    parent: "Central Asia",
+  },
+  // Africa
+  {
+    id: 32,
+    name: "Algeria",
+    country: "Algeria, North Africa",
+    region: "africa",
+    image: "/assets/generated/algeria.dim_800x600.jpg",
+    description:
+      "Africa's largest country reveals ancient Roman ruins at Timgad, the vast golden dunes of the Grand Erg Oriental Sahara, and the UNESCO-listed Casbah of Algiers. Algeria is an off-the-beaten-path gem waiting to be discovered.",
+  },
 ];
 
-type TabValue = "all" | "europe" | "middleeast" | "asia";
+type TabValue = "all" | "europe" | "middleeast" | "asia" | "africa";
 
 function DestinationCard({
   dest,
@@ -363,8 +412,8 @@ export default function Destinations() {
             Popular Destinations
           </h2>
           <p className="text-white/60 text-lg">
-            Handpicked destinations across Europe, the Middle East, and Asia —
-            expertly curated for unforgettable journeys.
+            Handpicked destinations across Europe, the Middle East, Asia, and
+            Africa — expertly curated for unforgettable journeys.
           </p>
         </motion.div>
 
@@ -377,7 +426,7 @@ export default function Destinations() {
               setShowAll(false);
             }}
           >
-            <TabsList className="bg-white/8 border border-white/12 p-1.5 rounded-2xl gap-1">
+            <TabsList className="bg-white/8 border border-white/12 p-1.5 rounded-2xl gap-1 flex-wrap justify-center">
               <TabsTrigger
                 data-ocid="destinations.all_tab"
                 value="all"
@@ -405,6 +454,13 @@ export default function Destinations() {
                 className="rounded-xl text-white/70 data-[state=active]:bg-teal-bright data-[state=active]:text-white font-semibold px-5"
               >
                 Asia
+              </TabsTrigger>
+              <TabsTrigger
+                data-ocid="destinations.africa_tab"
+                value="africa"
+                className="rounded-xl text-white/70 data-[state=active]:bg-teal-bright data-[state=active]:text-white font-semibold px-5"
+              >
+                Africa
               </TabsTrigger>
             </TabsList>
           </Tabs>

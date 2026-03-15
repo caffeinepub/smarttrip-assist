@@ -16,7 +16,7 @@ export default function Hero() {
       {/* Background */}
       <div className="absolute inset-0">
         <img
-          src="/assets/generated/hero-bg-v2.dim_1600x900.jpg"
+          src="/assets/generated/hero-bg-v3.dim_1600x900.jpg"
           alt="World travel destinations"
           className="w-full h-full object-cover"
         />

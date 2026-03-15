@@ -1,78 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  AlertCircle,
-  CheckCircle,
-  Clock,
-  Loader2,
-  Mail,
-  MessageCircle,
-  Phone,
-} from "lucide-react";
+import { Clock, Mail, MessageCircle, Phone } from "lucide-react";
 import { motion } from "motion/react";
-import { useState } from "react";
-import { Subject } from "../backend";
-import { useActor } from "../hooks/useActor";
-
-const subjectOptions = [
-  { value: Subject.hotelBooking, label: "Hotel Booking" },
-  { value: Subject.flightReservation, label: "Flight Reservation" },
-  { value: Subject.visaAssistance, label: "Visa Assistance" },
-  { value: Subject.holidayPackage, label: "Holiday Package" },
-  { value: Subject.general, label: "General Inquiry" },
-];
 
 export default function Contact() {
-  const { actor } = useActor();
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    subject: "" as Subject | "",
-    destination: "",
-    message: "",
-  });
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.subject || !actor) return;
-    setStatus("loading");
-    try {
-      await actor.submitInquiry({
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        subject: form.subject as Subject,
-        message: form.destination
-          ? `Destination: ${form.destination}\n\n${form.message}`
-          : form.message,
-      });
-      setStatus("success");
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        destination: "",
-        message: "",
-      });
-    } catch {
-      setStatus("error");
-    }
-  };
-
   return (
     <section id="contact" className="py-20 sm:py-28 bg-background">
       <div className="container mx-auto px-4 sm:px-6">
@@ -92,15 +21,14 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start max-w-5xl mx-auto">
-          {/* Left: Contact Options */}
+        <div className="max-w-2xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="font-display text-2xl font-bold text-foreground mb-8">
+            <h3 className="font-display text-2xl font-bold text-foreground mb-8 text-center">
               Contact Options
             </h3>
 
@@ -181,195 +109,13 @@ export default function Contact() {
                     Office Hours
                   </p>
                   <p className="font-semibold text-foreground">
-                    Mon&ndash;Sat, 9:00 AM &ndash; 7:00 PM (IST)
+                    Mon&ndash;Sat: 10:00 AM &ndash; 6:00 PM (IST)
                   </p>
                   <p className="text-muted-foreground text-sm mt-1">
-                    We serve clients worldwide.
+                    Sunday: Closed
                   </p>
                 </div>
               </div>
-            </div>
-          </motion.div>
-
-          {/* Right: Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            <div className="bg-card rounded-2xl p-7 sm:p-8 shadow-card border border-border">
-              <h3 className="font-display text-2xl font-bold text-foreground mb-6">
-                Send an Inquiry
-              </h3>
-
-              {status === "success" && (
-                <div
-                  data-ocid="contact.success_state"
-                  className="flex items-start gap-3 p-4 rounded-xl bg-green-50 border border-green-200 text-green-800 mb-6"
-                >
-                  <CheckCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-green-600" />
-                  <div>
-                    <p className="font-semibold text-sm">
-                      Inquiry Sent Successfully!
-                    </p>
-                    <p className="text-xs mt-0.5 text-green-700">
-                      We&apos;ll get back to you within 2 hours. Thank you for
-                      choosing SmartTrip Assist!
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {status === "error" && (
-                <div
-                  data-ocid="contact.error_state"
-                  className="flex items-start gap-3 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 mb-6"
-                >
-                  <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5 text-red-600" />
-                  <div>
-                    <p className="font-semibold text-sm">
-                      Something went wrong
-                    </p>
-                    <p className="text-xs mt-0.5 text-red-700">
-                      Please try again or contact us via WhatsApp.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="name" className="text-sm font-medium">
-                      Full Name *
-                    </Label>
-                    <Input
-                      id="name"
-                      data-ocid="contact.name_input"
-                      placeholder="Your full name"
-                      value={form.name}
-                      onChange={(e) =>
-                        setForm((p) => ({ ...p, name: e.target.value }))
-                      }
-                      required
-                      className="rounded-xl"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="email" className="text-sm font-medium">
-                      Email *
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      data-ocid="contact.email_input"
-                      placeholder="your@email.com"
-                      value={form.email}
-                      onChange={(e) =>
-                        setForm((p) => ({ ...p, email: e.target.value }))
-                      }
-                      required
-                      className="rounded-xl"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="phone" className="text-sm font-medium">
-                      Phone Number
-                    </Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      data-ocid="contact.phone_input"
-                      placeholder="+1 234 567 8900"
-                      value={form.phone}
-                      onChange={(e) =>
-                        setForm((p) => ({ ...p, phone: e.target.value }))
-                      }
-                      className="rounded-xl"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="subject" className="text-sm font-medium">
-                      Subject *
-                    </Label>
-                    <Select
-                      value={form.subject}
-                      onValueChange={(v) =>
-                        setForm((p) => ({ ...p, subject: v as Subject }))
-                      }
-                    >
-                      <SelectTrigger
-                        id="subject"
-                        data-ocid="contact.subject_select"
-                        className="rounded-xl"
-                      >
-                        <SelectValue placeholder="Select topic" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {subjectOptions.map((opt) => (
-                          <SelectItem key={opt.value} value={opt.value}>
-                            {opt.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="destination" className="text-sm font-medium">
-                    Destination of Interest
-                  </Label>
-                  <Input
-                    id="destination"
-                    data-ocid="contact.destination_input"
-                    placeholder="e.g. Dubai, Bali, Italy..."
-                    value={form.destination}
-                    onChange={(e) =>
-                      setForm((p) => ({ ...p, destination: e.target.value }))
-                    }
-                    className="rounded-xl"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <Label htmlFor="message" className="text-sm font-medium">
-                    Message *
-                  </Label>
-                  <Textarea
-                    id="message"
-                    data-ocid="contact.message_textarea"
-                    placeholder="Tell us about your travel plans, dates, group size, and any special requirements..."
-                    rows={4}
-                    value={form.message}
-                    onChange={(e) =>
-                      setForm((p) => ({ ...p, message: e.target.value }))
-                    }
-                    required
-                    className="rounded-xl resize-none"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  data-ocid="contact.submit_button"
-                  disabled={status === "loading"}
-                  className="w-full bg-teal-bright hover:bg-teal-light text-white font-bold text-base rounded-xl h-12 shadow-teal transition-all duration-200 hover:shadow-lg"
-                >
-                  {status === "loading" ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />{" "}
-                      Sending...
-                    </>
-                  ) : (
-                    "Send Inquiry"
-                  )}
-                </Button>
-              </form>
             </div>
           </motion.div>
         </div>
