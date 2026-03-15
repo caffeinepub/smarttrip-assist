@@ -33,9 +33,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.08] tracking-tight mb-6"
           >
-            Explore the World
-            <br />
-            <span className="text-gold">with Confidence</span>
+            SmartTrip Assist – Explore the World with Confidence
           </motion.h1>
 
           <motion.p
@@ -44,9 +42,9 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="text-white/75 text-lg sm:text-xl max-w-xl leading-relaxed mb-10"
           >
-            Expert travel planning for{" "}
+            SmartTrip Assist offers expert travel planning for{" "}
             <span className="text-white font-semibold">
-              Hotels &middot; Flights &middot; Visas &middot; Holiday Packages
+              Hotels, Flights, Visas and Holiday Packages.
             </span>
           </motion.p>
 
