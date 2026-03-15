@@ -79,15 +79,6 @@ const destinations: Destination[] = [
     description:
       "The Emerald Isle enchants with the dramatic Cliffs of Moher, cozy village pubs, and a warmth of culture and hospitality unmatched anywhere in the world.",
   },
-  {
-    id: 28,
-    name: "Albania",
-    country: "Albania, Europe",
-    region: "europe",
-    image: "/assets/generated/albania.dim_800x600.jpg",
-    description:
-      "Europe's hidden gem — Albania's stunning Riviera coastline boasts crystal-clear turquoise waters, dramatic cliffs, and charming fishing villages. Explore ancient ruins, Ottoman bazaars, and warm Mediterranean hospitality at unbeatable value.",
-  },
   // Middle East
   {
     id: 8,
@@ -151,6 +142,15 @@ const destinations: Destination[] = [
     image: "/assets/generated/sharjah.dim_800x500.jpg",
     description:
       "The cultural capital of the UAE, Sharjah enchants with its world-class museums, traditional arts, Islamic architecture, and the tranquil Khalid Lagoon waterfront.",
+  },
+  {
+    id: 33,
+    name: "Azerbaijan",
+    country: "Azerbaijan, Middle East",
+    region: "middleeast",
+    image: "/assets/generated/azerbaijan.dim_800x600.jpg",
+    description:
+      "Where East meets West — Baku's futuristic Flame Towers rise above a UNESCO-listed medieval old city on the Caspian Sea. Azerbaijan blends ancient Silk Road heritage with a modern, cosmopolitan energy unlike anywhere else in the region.",
   },
   // Asia
   {
